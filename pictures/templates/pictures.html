@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if picture.id %}
+        Image {{ picture.id }}
+    {% else %}
+        Images
+    {% endif %}
+{% endblock title %}
+
+{% block sidenav %}
+    {% if user.is_authenticated %}
+        <li>{{ user }} logged in</li>
+    {% else %}
+        <li>User not logged in</li>
+    {% endif %}
+
+    <li><a href="/">Home</a></li>
+    <li><a href="/pictures/post/new">New Image</a></li>
+    {% for picture in pictures %}
+    <li>
+        <a href="/pictures/{{ picture.id }}">Image {{ picture.id }}</a>
+    </li>
+    {% endfor %}
+{% endblock sidenav %}
+
+{% block logo %}
+{% endblock logo %}
+
+{% block content %}
+{% autoescape off %}
+    {% if picture.id %}
+        <h1>Image {{picture.id}}</h1>
+        <p><a href="{% url 'post_edit' pk=picture.pk %}">Edit</a></p>
+        <p>{{ picture.caption }}</p>
+        <img src="{{ picture.image }}"/>
+    {% else %}
+        <p>Please select an image for editing or create new image</p>
+    {% endif %}
+{% endautoescape %}
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}

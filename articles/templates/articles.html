@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if article.id %}
+        Article {{ article.id }}
+    {% else %}
+        Articles
+    {% endif %}
+{% endblock title %}
+
+{% block sidenav %}
+    {% if user.is_authenticated %}
+        <li>{{ user }} logged in</li>
+    {% else %}
+        <li>User not logged in</li>
+    {% endif %}
+
+    <li><a href="/">Home</a></li>
+    <li><a href="/articles/post/new">New Article</a></li>
+    {% for article in article_list %}
+    <li>
+        <a href="/articles/{{ article.id }}">Article {{ article.id }}</a>
+    </li>
+    {% endfor %}
+{% endblock sidenav %}
+
+{% block logo %}
+{% endblock logo %}
+
+{% block content %}
+{% autoescape off %}
+    {% if article.id %}
+        <h1>Article {{article.id}}</h1>
+        <div class="post">
+            <p><a href="{% url 'post_edit' pk=article.pk %}">Edit</a></p>
+        </div>
+        {{ article.content }}
+    {% else %}
+        <p>Please select an article for editing or create new article</p>
+    {% endif %}
+{% endautoescape %}
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}

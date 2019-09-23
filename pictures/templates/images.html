@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if image.uuid %}
+        Image {{ image.uuid }}
+    {% else %}
+        Images
+    {% endif %}
+{% endblock title %}
+
+{% block sidenav %}
+    {% if user.is_authenticated %}
+        <li>{{ user }} logged in</li>
+    {% else %}
+        <li>User not logged in</li>
+    {% endif %}
+
+    <li><a href="/">Home</a></li>
+    {% for image in images %}
+    <li>
+        <a href="/pictures/{{ image.uuid }}">Image {{ image.uuid }}</a>
+    </li>
+    {% endfor %}
+{% endblock sidenav %}
+
+{% block logo %}
+{% endblock logo %}
+
+{% block content %}
+{% autoescape off %}
+    {% if image.uuid %}
+        <h1>Image {{image.uuid}}</h1>
+        <p>{{ image.image }}</p>
+    {% else %}
+        <p>Please select an image for editing or create new image</p>
+    {% endif %}
+{% endautoescape %}
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}

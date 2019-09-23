@@ -1,0 +1,47 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+  <title>
+    {% block title %}
+    Untitled Document
+    {% endblock title %}
+  </title>
+  <link href="{% static 'main.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="wrapper">
+  <!--
+  <header id="header">
+    <div id="logo"><img src="{% static 'NNLogo.png' %}" width="50" height="50" alt=""/></div>
+  </header>
+   -->
+  <aside id="leftsidebar">
+    <nav id="nav">
+    <ul>
+      {% block sidenav %}
+      <!-- <li>{{ user }} logged in</li> -->
+      <!-- <li>Menu 1</li><li>Menu 2</li><li>Menu 3</li> -->
+      {% endblock sidenav %}
+    </ul>
+    </nav>
+    {% block logo %}
+    <img src="{% static 'NNLogo.png' %}" width="200" height="200" alt=""/>
+    {% endblock logo %}
+  </aside>
+
+  <section id="main">
+    {% block content %}
+    <h1>Welcome!</h1>
+    <p>This is the site template</p>
+    {% endblock content %}
+  </section>
+  <footer id="footer">
+    {% block footer %}
+    Copyright &copy; 2019 Noshy Noshy
+    {% endblock footer %}
+  </footer>
+</div>
+</body>
+</html>
